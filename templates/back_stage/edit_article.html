@@ -1,0 +1,37 @@
+{% extends "back_stage/add_article.html" %}
+
+{% block title %}
+    编辑文章
+{% endblock %}
+
+{% block content1 %}
+    <input type="text" name="title" class="form-control" autocomplete="off" value="{{ article_obj.title }}">
+{% endblock %}
+
+{% block content2 %}
+    <textarea name="content" id="article_content" cols="30">{{ article_obj.content }}</textarea>
+{% endblock %}
+
+{% block content3 %}
+    {% for sort in sort_list %}
+        <label>
+            {% if sort.sid   == article_obj.sort_id %}
+                <input type="radio" name="sort" value="{{ sort.sid }}" checked>{{ sort.title }}
+            {% else %}
+                <input type="radio" name="sort" value="{{ sort.sid }}">{{ sort.title }}
+            {% endif %}
+        </label>
+    {% endfor %}
+{% endblock %}
+
+{% block content4 %}
+    {% for tag in tag_list %}
+        <label>
+            {% if tag in article_obj.tag.all %}
+                <input type="checkbox" name="tag" value="{{ tag.tid }}" checked>{{ tag.name }}
+            {% else %}
+                <input type="checkbox" name="tag" value="{{ tag.tid }}">{{ tag.name }}
+            {% endif %}
+        </label>
+    {% endfor %}
+{% endblock %}

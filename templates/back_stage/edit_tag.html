@@ -1,0 +1,9 @@
+{% extends "back_stage/add_tag.html" %}
+
+{% block title %}
+    编辑标签
+{% endblock title %}
+
+{% block content1 %}
+    <input type="text" name="title" class="form-control" autocomplete="off" value="{{ tag.name }}">
+{% endblock content1 %}

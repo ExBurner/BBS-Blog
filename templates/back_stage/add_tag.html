@@ -1,0 +1,22 @@
+{% extends "back_stage/base.html" %}
+
+{% block content %}
+    <div class="option">
+        {% block title %}
+            添加标签
+        {% endblock title %}
+    </div>
+    <br>
+    <form method="post" style="width: 250px">
+        {% csrf_token %}
+        <div class="title form-group">
+            <label for="title">标签名</label>
+            <div>
+                {% block content1 %}
+                    <input type="text" name="name" class="form-control" autocomplete="off">
+                {% endblock content1 %}
+            </div>
+        </div>
+        <input type="submit" class="btn btn-info" value="提交">
+    </form>
+{% endblock content %}

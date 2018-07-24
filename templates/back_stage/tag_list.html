@@ -1,0 +1,9 @@
+<table class="table table-hover table-striped">
+    <tr>
+        <td>标签名</td>
+        <td>操作</td>
+        <td>操作</td>
+    </tr>
+    {% load my_tags %}
+    {% get_pages request tag_list "tag" %}
+</table>

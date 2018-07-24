@@ -1,0 +1,25 @@
+{% extends "login.html" %}
+{% block head %}
+    <h3 style="text-align: center">注册</h3>
+{% endblock %}
+
+{% block content %}
+    {% for foo in user %}
+        <div class="form-group">
+            <label for="{{ foo.auto_id }}">{{ foo.label }}</label>
+            {{ foo }}
+            <span class="error pull-right"></span>
+        </div>
+    {% endfor %}
+    <div class="form-group">
+        <label for="avatar">
+            头像
+            <img src="/static/blog/avatars/default.gif" id="avatar_img">
+        </label>
+        <input type="file" id="avatar" style="display: none">
+    </div>
+{% endblock content %}
+
+{% block submit %}
+    <input type="button" class="btn btn-success form-control reg-btn" value="注册">
+{% endblock submit %}

@@ -1,0 +1,37 @@
+{% for foo in page %}
+    {% if style == "sort" %}
+        <tr>
+            <td>{{ foo.title }}</td>
+            <td><a href="/edit_sort/{{ foo.sid }}">编辑</a></td>
+            <td><a href="/delete/sorts/{{ foo.sid }}">删除</a></td>
+        </tr>
+    {% elif style == "tag" %}
+        <tr>
+            <td>{{ foo.name }}</td>
+            <td><a href="/edit_tag/{{ foo.tid }}">编辑</a></td>
+            <td><a href="/delete/tags/{{ foo.tid }}">删除</a></td>
+        </tr>
+    {% endif %}
+{% endfor %}
+</table>
+<nav aria-label="Page navigation" class="col-md-offset-5">
+    <ul class="pagination pagination-sm">
+        {% if page.has_previous %}
+            <li><a href="?page={{ page.previous_page_number }}">上一页</a></li>
+        {% else %}
+            <li class="disabled"><a href="#" class="disabled">上一页</a></li>
+        {% endif %}
+        {% for range in ranges %}
+            {% if range == current_page %}
+                <li class="active"><a href="?page={{ range }}">{{ range }}</a></li>
+            {% else %}
+                <li><a href="?page={{ range }}">{{ range }}</a></li>
+            {% endif %}
+        {% endfor %}
+        {% if page.has_next %}
+            <li><a href="?page={{ page.next_page_number }}">下一页</a></li>
+        {% else %}
+            <li class="disabled"><a href="#" class="disabled">下一页</a></li>
+        {% endif %}
+    </ul>
+</nav>

@@ -1,0 +1,130 @@
+#topics {
+    background: rgba(255, 255, 255, 0.5);
+    min-height: 200px;
+    margin-bottom: 15px;
+    padding: 15px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-all;
+    border-radius: 7px;
+    box-shadow: 1px 1px 2px #A7A8AD;
+}
+
+#author_profile {
+    float: left;
+    width: 280px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #000;
+    margin-left: 0;
+    font-size: 12px;
+}
+
+.article_footer {
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+}
+
+#div_digg {
+    float: right;
+    margin-bottom: 10px;
+    margin-right: 30px;
+    font-size: 12px;
+    width: 155px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.diggit, .buryit {
+    float: left;
+    width: 46px;
+    height: 52px;
+    background: url(/static/blog/image/upup.gif) no-repeat;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 2px;
+    padding-top: 5px;
+    margin-right: 30px;
+}
+
+.buryit {
+    background: url(/static/blog/image/downdown.gif) no-repeat;
+}
+
+#div_digg .diggnum, #div_digg .burynum {
+    line-height: 1.5em !important;
+}
+
+.diggnum, .burynum {
+    font-size: 14px;
+    color: #075db3;
+}
+
+#digg_tips {
+    margin-right: 25px;
+    color: red;
+}
+
+#commentform_title {
+    font-size: 16px;
+    background: url(/static/blog/image/icon_addcomment.gif) no-repeat;
+    padding: 0 0 0 25px;
+    margin-bottom: 10px;
+}
+
+#comment_form_container p {
+    margin-top: 10px;
+    line-height: 20px;
+}
+
+#comment_form_container input.author {
+    background-position: 3px -3px;
+    background: url(/static/blog/image/icon_form.gif) no-repeat;
+    border: 1px solid #ccc;
+    padding: 4px 4px 4px 30px;
+    width: 300px;
+    font-size: 13px;
+}
+
+#tbCommentBody {
+    width: 100%;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.comment_btn {
+    height: 26px;
+    width: 68px;
+    margin: 0;
+    padding: 0;
+    line-height: 22px;
+}
+
+#topics .postDesc {
+    float: right;
+    width: 100%;
+    text-align: right;
+    padding-right: 5px;
+    color: #666;
+    margin-top: 5px;
+    font-size: 13px;
+    line-height: 1.8;
+    padding-bottom: 15px;
+}
+
+.comment_content {
+    margin: 15px 0 5px 0;
+    font-style: normal;
+    line-height: 180%;
+    border: 1px dashed #ddd;
+    padding: 10px;
+}
+
+.parent_comment {
+    color: #888;
+    margin-top: 6px;
+}
+
+
+
+

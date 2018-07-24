@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div id="topics">
+
+        <div class="article_title">
+            <a>{{ article_obj.title }}</a>
+        </div>
+        <div class="article_content">
+            {{ article_obj.content|safe }}
+        </div>
+        <div class="article_footer">
+            <div id="div_digg">
+                <div class="diggit action">
+                    <span class="diggnum" id="digg_count">{{ article_obj.up_count }}</span>
+                </div>
+                <div class="buryit action">
+                    <span class="burynum" id="bury_count">{{ article_obj.down_count }}</span>
+                </div>
+                <div class="diggword" id="digg_tips">　</div>
+            </div>
+        </div>
+        <div class="postDesc">
+            posted @ {{ article_obj.create_time|date:"Y-m-d H:i" }}　{{ user.username }}
+            　评论({{ article_obj.comment_count }})　点赞({{ article_obj.up_count }})
+        </div>
+    </div>
+    <div id="comment_show">
+        评论列表
+        <ul class="list-group">
+            {% for comment in comment_list %}
+                <li class="list-group-item">
+                    <span>#{{ forloop.counter }}楼　</span>
+                    <span>{{ comment.create_time|date:"Y-m-d H:i" }}　</span>
+                    <span><a href="/{{ comment.user.username }}">{{ comment.user.username }}</a></span>
+                    <span class="pull-right reply" username="{{ comment.user.username }}"
+                          comment_id="{{ comment.cid }}"><a>回复</a></span>
+                    {% if comment.parent_comment_id %}
+                        <p class="parent_comment">
+                            @{{ comment.parent_comment.user.username }}　
+                            {{ comment.parent_comment.content }}
+                        </p>
+                    {% endif %}
+                    <div class="comment_content">
+                        {{ comment.content }}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div id="comment_form_container">
+        <div id="commentform_title">发表评论</div>
+        <p>
+            昵称：<input type="text" id="tbCommentAuthor" class="author" disabled="disabled" size="50"
+                      value= {{ request.user.username }}>
+        </p>
+        <div class="commentbox_main">
+            <div class="commentbox_title">
+                <div class="commentbox_title_left">评论内容：</div>
+            </div>
+            <textarea id="tbCommentBody" class="comment_textarea"></textarea>
+            <input id="btn_comment_submit" type="button" class="comment_btn" value="提交评论">
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "back_stage/add_sort.html" %}
+
+{% block title %}
+    编辑分类
+{% endblock title %}
+
+{% block content1 %}
+    <input type="text" name="title" class="form-control" autocomplete="off" value="{{ sort.title }}">
+{% endblock content1 %}

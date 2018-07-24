@@ -1,0 +1,28 @@
+<div id="user_info">
+    昵称：{{ user.username }}<br>
+    园龄：{{ age }}个月
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">随笔分类</div>
+    {% for sort in sort_list %}
+        <div class="panel-body">
+            <a href="/{{ user.username }}/sort/{{ sort.0 }}">{{ sort.0 }}({{ sort.1 }})</a>
+        </div>
+    {% endfor %}
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">我的标签</div>
+    {% for tag in tag_list %}
+        <div class="panel-body">
+            <a href="/{{ user.username }}/tag/{{ tag.0 }}/">{{ tag.0 }}({{ tag.1 }})</a>
+        </div>
+    {% endfor %}
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">文章归档</div>
+    {% for date in date_list %}
+        <div class="panel-body">
+            <a href="/{{ user.username }}/date/{{ date.0|date:"Y-n" }}/">{{ date.0|date:"Y年n月" }}({{ date.1 }})</a>
+        </div>
+    {% endfor %}
+</div>

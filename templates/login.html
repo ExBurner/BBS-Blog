@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>博客开发系统</title>
+    <link rel="stylesheet" href="/static/blog/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/blog/css/index.css">
+    <link rel="icon" href="/static/blog/image/favicon.ico">
+    <style type="text/css">
+        body {
+            background: url(../static/blog/image/bk.jpeg) no-repeat;
+            background-size: 100%;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div class="row">
+    <div class="col-md-4 col-md-offset-4" style="margin-top: 100px">
+        <form id="form">
+            {% csrf_token %}
+            <div class="well">
+                <div class="login-head">
+                    {% block head %}
+                        <h3 style="display: inline-block">登录</h3>
+                        <a id="register" href="/register/">立即注册</a>
+                    {% endblock head %}
+                </div>
+                {% block content %}
+                    <div class="form-group">
+                        <label for="username">用户名</label>
+                        <input type="text" class="form-control" id="username" placeholder="用户名" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">密码</label>
+                        <input type="password" class="form-control" id="password" placeholder="密码" autocomplete="off">
+                    </div>
+    {#                <div class="row form-group">#}
+    {#                    <div class="col-md-6">#}
+    {#                        <label for="password">验证码</label>#}
+    {#                        <input type="text" class="form-control" id="verify_code" placeholder="请输入验证码" autocomplete="off">#}
+    {#                    </div>#}
+    {#                    <div class="col-md-6">#}
+    {#                        <label for="picture"></label>#}
+    {#                        <img src="/verify_code" style="height: 40px;width: 183px" id="verify_code_img">#}
+    {#                    </div>#}
+    {#                </div>#}
+                {% endblock content %}
+                <div class="form-group">
+                    <span id="error"></span>
+                    {% block submit %}
+                        <input type="button" class="btn btn-success form-control login-btn" value="登录">
+                    {% endblock submit %}
+                </div>
+                <div id="popup-captcha"></div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="/static/blog/js/jquery-3.3.1.min.js"></script>
+<script src="https://static.geetest.com/static/tools/gt.js"></script>
+<script src="/static/blog/js/blog.js"></script>
+
+{# 图片验证码 #}
+{#<script type="text/javascript">#}
+{#    $("#verify_code_img").click(function () {#}
+{#        $(this)[0].src += "?"#}
+{#    });#}
+{##}
+{#    $(".login-btn").click(function () {#}
+{#        $.ajax({#}
+{#            url: "/login/",#}
+{#            type: "POST",#}
+{#            data: {#}
+{#                "username": $("#username").val(),#}
+{#                "password": $("#password").val(),#}
+{#                "verify_code": $("#verify_code").val()#}
+{#            },#}
+{#            success:function (data) {#}
+{#                    if(data["user"]){#}
+{#                        location.href = "/index/"#}
+{#                    }#}
+{#                    else {#}
+{#                        $("#error").html(data["msg"]).css({"color": "red"})#}
+{#                    }#}
+{#                }#}
+{#        })#}
+{#    })#}
+{#</script>#}
+</html>

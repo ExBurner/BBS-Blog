@@ -1,0 +1,42 @@
+a:hover {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.login-head {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.login-head a {
+    margin-left: 287px;
+    color: #5cb85c;
+}
+
+#avatar_img {
+    width: 60px;
+    height: 60px;
+    margin-left: 20px;
+}
+
+.error {
+    color: red;
+}
+
+#user_log {
+    margin-right: 5px;
+}
+
+#user_avatar {
+    width: 60px;
+    height: 60px;
+}
+
+.article_foot {
+    margin-top: 10px;
+}
+
+.article_foot img {
+    vertical-align: -3px;
+    margin-right: 2px;
+}

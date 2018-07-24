@@ -1,0 +1,43 @@
+{% extends "back_stage/base.html" %}
+
+{% block content %}
+    <table class="table table-hover table-striped">
+        <tr>
+            <td>标题</td>
+            <td>评论数</td>
+            <td>点赞数</td>
+            <td>操作</td>
+            <td>操作</td>
+        </tr>
+        {% for article in page %}
+            <tr>
+                <td><a href="/{{ article.user.username }}/article/{{ article.aid }}/">{{ article.title }} ( {{ article.create_time|date:"Y-m-d H:i" }} )</a></td>
+                <td>{{ article.comment_count }}</td>
+                <td>{{ article.up_count }}</td>
+                <td><a href="/edit/{{ article.aid }}">编辑</a></td>
+                <td><a href="/delete/article/{{ article.aid }}">删除</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <nav aria-label="Page navigation" class="col-md-offset-5">
+        <ul class="pagination pagination-sm">
+            {% if page.has_previous %}
+                <li><a href="?page={{ page.previous_page_number }}">上一页</a></li>
+            {% else %}
+                <li class="disabled"><a href="#" class="disabled">上一页</a></li>
+            {% endif %}
+            {% for range in ranges %}
+                {% if range == current_page %}
+                    <li class="active"><a href="?page={{ range }}">{{ range }}</a></li>
+                {% else %}
+                    <li><a href="?page={{ range }}">{{ range }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if page.has_next %}
+                <li><a href="?page={{ page.next_page_number }}">下一页</a></li>
+            {% else %}
+                <li class="disabled"><a href="#" class="disabled">下一页</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endblock %}

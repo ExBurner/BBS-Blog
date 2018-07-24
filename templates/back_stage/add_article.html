@@ -1,0 +1,73 @@
+{% extends "back_stage/base.html" %}
+
+{% block content %}
+    <div class="option">
+        {% block title %}
+            添加文章
+        {% endblock title %}
+    </div>
+    <br>
+    <form method="post">
+        {% csrf_token %}
+        <div class="title form-group">
+            <label for="title">标题</label>
+            <div>
+                {% block content1 %}
+                    <input type="text" name="title" class="form-control" autocomplete="off">
+                {% endblock content1 %}
+            </div>
+        </div>
+        <div class="content form-group">
+            <label for="content">内容</label>
+            <div>
+                {% block content2 %}
+                    <textarea name="content" id="article_content" cols="30"></textarea>
+                {% endblock content2 %}
+            </div>
+        </div>
+        <div class="option">常用选项</div>
+        <div class="radio">
+            <p>个人分类：</p>
+            {% block content3 %}
+                {% for sort in sort_list %}
+                    <label>
+                        <input type="radio" name="sort" value="{{ sort.sid }}">{{ sort.title }}
+                    </label>
+                {% endfor %}
+            {% endblock content3 %}
+        </div>
+        <div class="checkbox">
+            <p>选择标签：</p>
+            {% block content4 %}
+                {% for tag in tag_list %}
+                    <label>
+                        <input type="checkbox" name="tag" value="{{ tag.tid }}">{{ tag.name }}
+                    </label>
+                {% endfor %}
+            {% endblock content4 %}
+        </div>
+        <input type="submit" class="btn btn-info" value="提交">
+    </form>
+    <script charset="utf-8" src="/static/blog/js/jquery-3.3.1.min.js"></script>
+    <script charset="utf-8" src="/static/blog/kindeditor/kindeditor-all-min.js"></script>
+    <script>
+        KindEditor.ready(function (K) {
+            window.editor = K.create('#article_content', {
+                width: "850px",
+                height: "300px",
+                resizeType: 0,
+                items: [
+                    'source', '|', 'undo', 'redo', '|', 'preview', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                    'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'formatblock', 'fontname',
+                    'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'strikethrough',
+                    'lineheight', '|', 'image', 'table', 'hr', 'emoticons'
+                ],
+                uploadJson: "/upload/",
+                extraFileUploadParams: {
+                    "csrfmiddlewaretoken": $("[name='csrfmiddlewaretoken']").val()
+                },
+                filePostName: "upload_image"
+            });
+        });
+    </script>
+{% endblock content %}

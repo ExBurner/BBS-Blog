@@ -1,0 +1,21 @@
+{% extends "back_stage/base.html" %}
+
+{% block content %}
+    <div class="option">
+        {% block title %}
+            修改头像
+        {% endblock title %}
+    </div>
+    <form class="col-md-5">
+        {% csrf_token %}
+        <br>
+        <div class="form-group">
+            <label for="avatar">
+                <p>头像</p>
+                <img src="/media/{{ user.avatar }}" id="avatar_img" style="width: 200px;height: 200px">
+            </label>
+            <input type="file" id="avatar" style="display: none">
+        </div>
+        <button type="button" class="btn btn-primary" id="change_avatar">提交</button>
+    </form>
+{% endblock content %}

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>博客首页</title>
+    <link rel="icon" href="/static/blog/image/favicon.ico">
+    <link rel="stylesheet" href="/static/blog/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/blog/css/index.css">
+</head>
+<body>
+<!--顶部导航栏-->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/index">博客园</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="#">新闻</a></li>
+                <li><a href="#">博文</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if request.user.is_authenticated %}
+                    <li><a><img src="/static/blog/image/user_log.png" id="user_log">{{ request.user.username }}</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">用户中心 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/{{ request.user.username }}">我的博客</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/logout">注销</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li><a href="/register">注册</a></li>
+                    <li><a href="/login">登录</a></li>
+                {% endif %}
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<!-- 主体内容 -->
+<div class="container-fluid">
+    <div class="row">
+        <!-- 左侧区域 -->
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">推荐博客排行</div>
+                {% for user in user_ranking_list %}
+                    <div class="panel-body">
+                        <a href="/{{ user.0 }}">{{ user.0 }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- 中间文章区域 -->
+        <div class="col-md-7">
+            <div class="article_list">
+                {% for article in page %}
+                    <div class="article_item">
+                        <h5><a href="/{{ article.user.username }}/article/{{ article.aid }}/">{{ article.title }}</a></h5>
+                        <div class="article_desc media-body">
+                            <span class="media-left">
+                                <a href="/{{ article.user.username }}"><img src="/media/{{ article.user.avatar }}" id="user_avatar"></a>
+                            </span>
+                            <span class="media-right">{{ article.abstract }}</span>
+                        </div>
+                        <div class="article_foot small">
+                            <span><a href="/{{ article.user.username }}">{{ article.user.username }}</a></span>　　　
+                            <span>发布于 {{ article.create_time|date:"Y-m-d H:i"}}　　</span>
+                            <span><img src="/static/blog/image/comment.png">评论({{ article.comment_count }})　</span>
+                            <span><img src="/static/blog/image/like.png">点赞({{ article.up_count }})</span>
+                        </div>
+                    </div>
+                    <hr>
+                {% endfor %}
+            </div>
+            <nav aria-label="Page navigation" class="col-md-offset-4">
+                <ul class="pagination">
+                    {% if page.has_previous %}
+                        <li><a href="?page={{ page.previous_page_number }}">上一页</a></li>
+                    {% else %}
+                        <li class="disabled"><a href="#">上一页</a></li>
+                    {% endif %}
+                    {% for range in ranges %}
+                        {% if range == current_page %}
+                            <li class="active"><a href="?page={{ range }}">{{ range }}</a></li>
+                        {% else %}
+                            <li><a href="?page={{ range }}">{{ range }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if page.has_next %}
+                        <li><a href="?page={{ page.next_page_number }}">下一页</a></li>
+                    {% else %}
+                        <li class="disabled"><a href="#">下一页</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+        <!-- 右侧区域 -->
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">阅读排行</div>
+                {% for article in article_ranking_list %}
+                    <div class="panel-body">
+                        <a href="/{{ request.user.username }}/article/{{ article.aid }}">{{ article.title }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="/static/blog/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/static/blog/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+</script>
+</html>
